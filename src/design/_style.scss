@@ -4,11 +4,95 @@
     padding: 0;
 }
 
+html {
+    font-size: 12px;
+}
+
+$header_height: 80px;
+ 
+.svg_demo {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
+}
+
+
 .header {
+  grid-column: 1 / span all;
   font-family: ubuntu;
   width: 100%;
-  height: 80px;
+  height: $header_height;
   background-color: #343434;
   color: #fff;
   display: flex;
 }
+
+
+.demo {
+    display: grid;
+    grid-template-columns: minmax(400px, 50%) auto;
+
+
+    &_code {
+        height: calc(100vh - #{$header_height});
+        background-color: #550460;
+        min-height: 700px;
+        color: #fff;
+        padding: 2vw;
+
+        pre {
+            background-color: #b9b9b9;
+            padding: 2px 30px;
+        }
+
+        code {
+            font-size: 2rem;
+            display: flex;
+            color: grey;
+
+            .attr_block {
+                display: flex;
+            }
+        }
+    }
+
+
+    &_result {
+        height: calc(100vh - #{$header_height});
+        background-color: #7e7e7e;
+        min-height: 700px;
+    }
+
+}
+
+.tag {
+    &_open, &_close {
+        color: #930000;
+    }
+
+    &_name {
+        color: #b17404;
+        color: #930000;
+    }
+}
+
+.attr {
+    
+    &_name {
+        color: #0f6200;
+    }
+
+    &_height {
+        border: 2px solid #f00;
+        background-color: #fff;
+        padding: 2px 6px;
+        transform: translateY(-4px);
+        cursor: pointer;
+    }
+}
+
+
+
+
+
