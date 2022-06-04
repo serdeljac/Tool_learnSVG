@@ -38,7 +38,7 @@
               </div>
 
               <div class="attr have_enable">
-                  <div class="attr_wrapper ">
+                  <div class="attr_wrapper" v-bind:class = "(viewbox_enable)?'class_if_is_true':'deactivated'">
                     <span @click="selectedAttr('viewbox_1')" class="attr_name">viewBox</span>
                     <span>="</span>
                     <div @click="selectedAttr('viewbox_1')" class="attr_adjust attr_viewbox_1">{{ attr_viewbox_1 }}</div>
@@ -54,7 +54,8 @@
               </div>
 
               <div class="tag">
-                  <span> /&gt; &lt;/svg&gt;</span>
+                  <span v-if="viewbox_enable"> /&gt;</span>
+                  <span v-else> /&gt; &lt;/svg&gt;</span>
               </div>
 
             </code>
@@ -70,7 +71,7 @@
               </div>
               <div v-else-if="this.selected == 'viewbox_1'">
                 <p>Min-x: </p>
-                <input v-model="attr_viewbox_1" type="range" min="0" max="5" class="slider">
+                <input v-model="attr_viewbox.attr1" type="range" min="0" max="5" class="slider">
               </div>
               <div v-else-if="this.selected == 'viewbox_2'">
                 <p>Min-y: </p>
@@ -99,7 +100,7 @@
               class="svg"
               :height="attr_height"
               :width="attr_width"
-              viewBox="0 0 1000 1000">
+              :viewBox="attr_viewbox">
             <circle cx="200" cy="200" r="200"/>
             </svg>
           </div>
@@ -129,11 +130,12 @@ export default {
           selected: "",
           attr_height: 500,
           attr_width: 500,
-          attr_viewbox: true,
+          viewbox_enable: false,
           attr_viewbox_1: 0,
           attr_viewbox_2: 0,
           attr_viewbox_3: 0,
           attr_viewbox_4: 0,
+          viewBox: [this.attr_viewbox_1, this.attr_viewbox_2, this.attr_viewbox_3, this.attr_viewbox_4]
       }
   },
   methods: {
@@ -147,8 +149,8 @@ export default {
   
     },
     checkbox_viewbox() {
-      this.attr_viewbox = !this.attr_viewbox;
-      console.log(this.attr_viewbox);
+      this.viewbox_enable = !this.viewbox_enable;
+      console.log(this.viewbox_enable);
     }
   }
 
